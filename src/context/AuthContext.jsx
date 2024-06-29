@@ -1,20 +1,21 @@
 'use client'
-
-import React, { useState, useEffect } from "react";
+import React, { createContext, useContext, useState, useEffect} from 'react'
+import { useRouter } from "next/navigation";
 import {
-  useEthereum,
-  useConnect,
-  useAuthCore,
-} from "@particle-network/auth-core-modal";
-import { ZetaChainTestnet } from "@particle-network/chains";
-import { AAWrapProvider, SmartAccount } from "@particle-network/aa";
-import { ParticleProvider } from "@particle-network/provider";
-import { ParticleNetwork } from "@particle-network/auth";
-import  {ethers}  from "ethers";
-import { useAuth } from "@/context/AuthContext";
+    useEthereum,
+    useConnect,
+    useAuthCore
+  } from "@particle-network/auth-core-modal";
+  import { ZetaChainTestnet } from "@particle-network/chains";
+  import { AAWrapProvider, SmartAccount } from "@particle-network/aa";
+  import { ParticleProvider } from "@particle-network/provider";
+  import { ParticleNetwork } from "@particle-network/auth";
+  import  {ethers}  from "ethers"
 
+const SocialoginAccount = createContext()
 
-const Login = () => {
+export const AuthContext = ({children}) => {
+
     const { provider } = useEthereum();
     const smartAccount = new SmartAccount(provider, {
         projectId:  process.env.NEXT_PUBLIC_APP_PROJECT_ID,
@@ -29,6 +30,7 @@ const Login = () => {
         }
     }
     });
+    console.log(smartAccount);
     const customProvider = new ethers.BrowserProvider(new AAWrapProvider(smartAccount), "any");
   const { connect, disconnect } = useConnect();
   const { userInfo } = useAuthCore();
@@ -36,22 +38,36 @@ const Login = () => {
 
 
   const [balance, setBalance] = useState(null)
+  const [address, setaddress] = useState(null)
 //   const [userInfo, setUserInfo] = useState(null);
 
-    const { handleLogin: login, balance: balanceInfo, address, disconnect: logout, walletAddress } = useAuth()
+
   useEffect(() => {
     if (userInfo) {
         fetchBalance()
+        walletAddress();
     }
   }, [userInfo, smartAccount, customProvider])
 
   console.log(userInfo);
   console.log(balance);
+  const walletAddress = async () => {
+    const addressEvM = userInfo?.wallets
+        .filter((item) => item.chain_name === "evm_chain")
+        .map((item) => item.public_address);
+
+    console.log(addressEvM[0], "evm");
+    setaddress(addressEvM[0])
+    return addressEvM[0];
+}
+
+//   userInfo?.wallets.map((item) => {
+//     item.chain_name == "evm" ? setaddress(item.public_address) : "no evm address"
+// })
 
   const fetchBalance = async () => {
-    const address = await smartAccount.getAddress()
-
     const balanceResponse = await customProvider.getBalance(address);
+    console.log(balanceResponse, "balance");
     setBalance(ethers.formatEther(balanceResponse))
   }
 
@@ -80,29 +96,17 @@ const Login = () => {
     const txReceipt = await txResponse.wait();
   };
 
-  // const addressEvm = walletAddress()
-  return <div>
-    <div className="App">
-      {!userInfo ? (
-        <div>
-          <button onClick={() => handleLogin('google')}>Sign in with Google</button>
-          <button onClick={() => login('twitter')}>Sign in with Twitter</button>
-          <button onClick={() => login('github')}>Sign in with github</button>
-        </div>
-      ) : (
-        <div>
-          <h2>{userInfo.name}</h2>
-          <div>
-            <small>{balance}</small>
-            {/* <small>{addressEvm}</small> */}
-            <p>{address}</p>
-            <button onClick={executeUserOp}>Execute User Operation</button>
-            <button onClick={logout}>Disconnect</button>
-          </div>
-        </div>
-      )}
-    </div>
-  </div>;
-};
 
-export default Login;
+
+  return (
+    <SocialoginAccount.Provider value={{ handleLogin, userInfo, balance, connect, disconnect, address, walletAddress}}>
+        {children}
+    </SocialoginAccount.Provider>
+  )
+}
+
+export default SocialoginAccount
+
+export const useAuth = () => {
+    return useContext(SocialoginAccount)
+}

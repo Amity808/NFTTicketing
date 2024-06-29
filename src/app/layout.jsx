@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ZetaChainTestnet } from "@particle-network/chains";
 import { AuthCoreContextProvider } from "@particle-network/auth-core-modal";
-
+import { AuthContext } from "@/context/AuthContext";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -34,7 +34,7 @@ export default function RootLayout({ children }) {
             },
           }}
         >
-          {children}
+          <AuthContext>{children}</AuthContext>
         </AuthCoreContextProvider>
       </body>
     </html>
