@@ -15,21 +15,7 @@ import { useAuth } from "@/context/AuthContext";
 
 
 const Login = () => {
-    const { provider } = useEthereum();
-    const smartAccount = new SmartAccount(provider, {
-        projectId:  process.env.NEXT_PUBLIC_APP_PROJECT_ID,
-        clientKey:  process.env.NEXT_PUBLIC_APP_CLIENT_KEY,
-        appId: process.env.NEXT_PUBLIC_APP_APP_ID,
-      // aaOptions: {
-        // }
-        aaOptions: {
-          accountContracts: {
-              simple: [{ chainId: [ZetaChainTestnet.id], version: '1.0.0'}]
-          
-        }
-    }
-    });
-    const customProvider = new ethers.BrowserProvider(new AAWrapProvider(smartAccount), "any");
+
   const { connect, disconnect } = useConnect();
   const { userInfo } = useAuthCore();
 
@@ -39,21 +25,12 @@ const Login = () => {
 //   const [userInfo, setUserInfo] = useState(null);
 
     const { handleLogin: login, balance: balanceInfo, address, disconnect: logout, walletAddress } = useAuth()
-  useEffect(() => {
-    if (userInfo) {
-        fetchBalance()
-    }
-  }, [userInfo, smartAccount, customProvider])
+ 
 
   console.log(userInfo);
-  console.log(balance);
 
-  const fetchBalance = async () => {
-    const address = await smartAccount.getAddress()
 
-    const balanceResponse = await customProvider.getBalance(address);
-    setBalance(ethers.formatEther(balanceResponse))
-  }
+
 
   const handleLogin = async (authType) => {
     if(!userInfo) {
@@ -93,7 +70,7 @@ const Login = () => {
         <div>
           <h2>{userInfo.name}</h2>
           <div>
-            <small>{balance}</small>
+            <small>{balanceInfo}</small>
             {/* <small>{addressEvm}</small> */}
             <p>{address}</p>
             <button onClick={executeUserOp}>Execute User Operation</button>

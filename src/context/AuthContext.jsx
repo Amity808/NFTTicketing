@@ -39,36 +39,27 @@ export const AuthContext = ({children}) => {
 
   const [balance, setBalance] = useState(null)
   const [address, setaddress] = useState(null)
+  const [particleAddress, setparticleAddress] = useState('')
 //   const [userInfo, setUserInfo] = useState(null);
 
 
   useEffect(() => {
     if (userInfo) {
         fetchBalance()
-        walletAddress();
     }
   }, [userInfo, smartAccount, customProvider])
 
   console.log(userInfo);
   console.log(balance);
-  const walletAddress = async () => {
-    const addressEvM = userInfo?.wallets
-        .filter((item) => item.chain_name === "evm_chain")
-        .map((item) => item.public_address);
 
-    console.log(addressEvM[0], "evm");
-    setaddress(addressEvM[0])
-    return addressEvM[0];
-}
 
-//   userInfo?.wallets.map((item) => {
-//     item.chain_name == "evm" ? setaddress(item.public_address) : "no evm address"
-// })
 
   const fetchBalance = async () => {
-    const balanceResponse = await customProvider.getBalance(address);
-    console.log(balanceResponse, "balance");
-    setBalance(ethers.formatEther(balanceResponse))
+    const addressParticle = await smartAccount.provider.selectedAddress;
+    console.log(addressParticle)
+    setaddress(addressParticle)
+    const balanceResponseParticle = await customProvider.getBalance(addressParticle);
+    setBalance(ethers.formatEther(balanceResponseParticle))
   }
 
   const handleLogin = async (authType) => {
@@ -99,7 +90,7 @@ export const AuthContext = ({children}) => {
 
 
   return (
-    <SocialoginAccount.Provider value={{ handleLogin, userInfo, balance, connect, disconnect, address, walletAddress}}>
+    <SocialoginAccount.Provider value={{ handleLogin, userInfo, balance, connect, disconnect, address}}>
         {children}
     </SocialoginAccount.Provider>
   )
