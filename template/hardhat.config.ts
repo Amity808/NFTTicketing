@@ -14,6 +14,7 @@ const config: HardhatUserConfig = {
     compilers: [
       { version: "0.5.16" /** For uniswap v2 core*/ },
       { version: "0.8.7" },
+      { version: "0.8.20" },
     ],
   },
 };
