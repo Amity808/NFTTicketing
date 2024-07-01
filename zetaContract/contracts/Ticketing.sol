@@ -14,7 +14,7 @@ import "@zetachain/toolkit/contracts/OnlySystem.sol";
 contract MyToken is zContract, OnlySystem, ERC721, ERC721Enumerable, ERC721URIStorage {
     uint256 public _nextTokenId;
     SystemContract public systemContract;
-
+    uint256 constant BITCOIN = 18332;
     enum TicketStatus {
         ACTIVE,
         NOTAVAILABLE,
@@ -47,10 +47,31 @@ contract MyToken is zContract, OnlySystem, ERC721, ERC721Enumerable, ERC721URISt
     mapping (uint256 => Ticket) public _tickets;
     mapping (address => TicketSold[]) public _ticketSold;
 
+    mapping(uint256 => uint256) public tokenChains;
+    mapping(uint256 => uint256) public tokenAmounts;
+
+
     constructor(address systemContractAddress)
         ERC721("EntertainMent", "TKT")
     {
         systemContract = SystemContract(systemContractAddress);
+    }
+
+    function onCrossChainCall(
+        zContext calldata context,
+        address zrc20,
+        uint256 amount,
+        bytes calldata message
+    ) external override onlySystem(systemContract) {
+        uint256 ticketId;
+
+        if (context.chainID == BITCOIN) {
+            recipient = BytesHelperLib.bytesToAddress(message, 0);
+        } else {
+            recipient = abi.decode(message, (ticketId));
+        }
+
+        safeMint(ticketId);
     }
 
 
