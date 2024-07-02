@@ -3,7 +3,7 @@ import Navbar from './Navbar'
 import Image from 'next/image'
 const Header = () => {
   return (
-    <div className='header1_gradient'>
+    <div className=''>
         <Navbar />
         <div className=' px-2 flex flex-row justify-around items-center max-sm:flex-col'>
             <div>
@@ -11,11 +11,11 @@ const Header = () => {
                 <p className=' text-white font-normal text-base'>Panda NFT is the primier marketplace for NFT, which are digital items you can <br /> truly own. Digital items have existed for a long time, but never like <br /> this.</p>
             </div>
             <div>
-                <Image src="/header.png" width={400} height={700} />
+                <Image src="/header.png" width={400} height={536} />
             </div>
         </div>
         <div>
-            <h3 className=' text-center text-2xl font-bold'>ZetaChain</h3>
+            <h3 className=' text-center text-2xl font-bold text-white'>ZetaChain</h3>
         </div>
     </div>
   )
