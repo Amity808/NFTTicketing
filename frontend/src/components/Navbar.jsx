@@ -2,8 +2,13 @@
 import React from 'react'
 import Link from "next/link"
 import { useAuth } from "@/context/AuthContext";
-
+import {
+  useEthereum,
+  useConnect,
+  useAuthCore,
+} from "@particle-network/auth-core-modal";
 const Navbar = () => {
+  const { connected, connect, disconnect } = useConnect()
   return (
     <div className=''>
       <div className="text-white flex justify-around items-center py-9">
