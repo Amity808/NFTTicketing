@@ -9,6 +9,8 @@ import {
 import Header from "@/components/Header"
 import { SignupForm } from "@/components/SocialLogin"
 import Howticket from "@/components/Howticket"
+import Footer from '@/components/Footer'
+
 const Dashboard = () => {
 
   const { userInfo } = useAuthCore()
@@ -20,6 +22,7 @@ const Dashboard = () => {
           <>
           <Header />
           <Howticket />
+          <Footer />
           <button onClick={disconnect}>Disconnect</button>
           <p>Dashboard</p>
           </>
