@@ -16,7 +16,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={`${inter.className} header1_gradient`}>
         <AuthCoreContextProvider
           options={{
             projectId: process.env.NEXT_PUBLIC_APP_PROJECT_ID,

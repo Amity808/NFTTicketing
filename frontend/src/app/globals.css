@@ -8,26 +8,17 @@
   --background-end-rgb: 255, 255, 255;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+.header_gradient {
+  background: rgb(12,17,51);
+background: linear-gradient(90deg, rgba(12,17,51,1) 11%, rgba(2,2,15,1) 29%, rgba(3,5,25,1) 74%);
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+.hero_gradient {
+  background: rgb(2,2,15);
+background: linear-gradient(71deg, rgba(2,2,15,1) 48%, rgba(10,15,64,1) 74%);
 }
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+.header1_gradient {
+  background: rgb(2,2,15);
+  background: linear-gradient(322deg, rgba(2,2,15,1) 37%, rgba(6,11,61,1) 78%);
+  background-repeat: no-repeat;
 }

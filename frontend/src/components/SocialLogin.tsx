@@ -15,7 +15,7 @@ import {
 } from "@particle-network/auth-core-modal";
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
-export function SignupFormDemo() {
+export function SignupForm() {
 
   const router = useRouter()
   const { connect, disconnect } = useConnect();
