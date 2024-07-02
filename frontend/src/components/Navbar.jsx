@@ -1,10 +1,12 @@
+'use client'
 import React from 'react'
 import Link from "next/link"
+import { useAuth } from "@/context/AuthContext";
 
 const Navbar = () => {
   return (
-    <div>
-      <div className="text-white flex justify-around items-center my-9">
+    <div className=''>
+      <div className="text-white flex justify-around items-center py-9">
         <div>
             <h1 className=' text-3xl font-bold'>Stay Studio</h1>
         </div>
