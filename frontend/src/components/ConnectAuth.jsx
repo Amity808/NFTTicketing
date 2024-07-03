@@ -1,34 +1,83 @@
-'use client'
+"use client";
 import React from "react";
 import {
-    useEthereum,
-    useConnect,
-    useAuthCore,
-  } from "@particle-network/auth-core-modal";
-  import {SignupForm} from "@/components/SocialLogin"
+  useEthereum,
+  useConnect,
+  useAuthCore,
+} from "@particle-network/auth-core-modal";
+import { SignupForm } from "@/components/SocialLogin";
+import { useAuth } from "@/context/AuthContext";
+import { truncateAddress } from "@/utils/truncateAddress"
 const ConnectAuth = () => {
-    const { connected, connect, disconnect } = useConnect()
+  const { connected, connect, disconnect } = useConnect();
+  const { handleLogin: login, balance: balanceInfo, address, disconnect: logout, walletAddress } = useAuth()
   return (
     <div>
-        {connected ? <>
-      <div className="dropdown dropdown-left">
-        <div tabIndex={0} role="button" className="btn m-1">
-          {connected ? <><button className=' rounded-md border-2 border-solid py-2 px-3 text-lg font-normal'></button></> : <><button className=' rounded-md border-2 border-solid py-2 px-3 text-lg font-normal'>Login</button></>}
-        </div>
-        <ul
-          tabIndex={0}
-          className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
-        >
-          <li>
-            <a>Item 1</a>
-          </li>
-          <li>
-            <a>Item 2</a>
-          </li>
-        </ul>
-      </div>
-        
-        </> : <><SignupForm /></>}
+      {connected ? (
+        <>
+          <div className="dropdown dropdown-bottom dropdown-end">
+            <div tabIndex={0} role="button" className="btn m-1">
+              View Wallet
+            </div>
+            <ul
+              tabIndex={0}
+              className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
+            >
+              <li>
+              <a>
+                <p>{balanceInfo}</p>
+                </a>
+              </li>
+              <li>
+              <a>
+                  <p>{truncateAddress(address)}</p>
+                </a>
+              </li>
+              <li>
+              <a>
+                  <button className="" onClick={() => disconnect()}>
+                    Disconnect
+                  </button>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </>
+      ) : (
+        <>
+          <div className="dropdown dropdown-bottom dropdown-end">
+            <div tabIndex={0} role="button" className="btn m-1">
+              Connect Wallet
+            </div>
+            <ul
+              tabIndex={0}
+              className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
+            >
+              <li>
+              <a>
+                <button className="" onClick={() => login("twitter")}>
+                    Connect with Twitter
+                  </button>
+                </a>
+              </li>
+              <li>
+              <a>
+                  <button className="" onClick={() => login("google")}>
+                    Connect with Google
+                  </button>
+                </a>
+              </li>
+              <li>
+              <a>
+                  <button className="" onClick={() => login("github")}>
+                    Connect with Github
+                  </button>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </>
+      )}
     </div>
   );
 };

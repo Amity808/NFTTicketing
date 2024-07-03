@@ -7,6 +7,7 @@ import {
   useConnect,
   useAuthCore,
 } from "@particle-network/auth-core-modal";
+import ConnectAuth from "@/components/ConnectAuth"
 const Navbar = () => {
   const { connected, connect, disconnect } = useConnect()
   return (
@@ -34,7 +35,8 @@ const Navbar = () => {
         </div>
 
         <div>
-            <button className=' rounded-md border-2 border-solid py-2 px-3 text-lg font-normal'>Login</button>
+            {/* <button className=' rounded-md border-2 border-solid py-2 px-3 text-lg font-normal'>Login</button> */}
+            <ConnectAuth />
         </div>
       </div>
     </div>
