@@ -1,9 +1,9 @@
 import React from 'react'
 
-const ButtonComp = ({ name }) => {
+const ButtonComp = ({ children, ...props }) => {
   return (
     <div>
-        <button className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg">{name}</button>
+        <button className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg" {...props}>{children}</button>
     </div>
   )
 }
