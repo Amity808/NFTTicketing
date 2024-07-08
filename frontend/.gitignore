@@ -37,6 +37,8 @@ next-env.d.ts
 
 .env 
 ./env
-access_token
+.access_token
 /access_token
-
+access_token
+env
+./access_token
