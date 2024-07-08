@@ -40,6 +40,7 @@ export const AuthContext = ({children}) => {
   const [balance, setBalance] = useState(null)
   const [address, setaddress] = useState(null)
   const [particleAddress, setparticleAddress] = useState('')
+  // const [provider, setProvider] = useState(second)
 //   const [userInfo, setUserInfo] = useState(null);
 
 
