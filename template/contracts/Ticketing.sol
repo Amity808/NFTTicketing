@@ -26,7 +26,7 @@ import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
     }
 
     uint256 public _nextTokenId;
-    uint256 ticketLen;
+    uint256 public ticketLen;
 
     struct Ticket {
         uint256 price;
