@@ -23,8 +23,7 @@ const Dashboard = () => {
           <Header />
           <Howticket />
           <Footer />
-          <button onClick={disconnect}>Disconnect</button>
-          <p>Dashboard</p>
+        
           </>
       {/* //   ) : <>
       //   <SignupForm />

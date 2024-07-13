@@ -4,6 +4,8 @@ import "./globals.css";
 import { ZetaChainTestnet } from "@particle-network/chains";
 import { AuthCoreContextProvider } from "@particle-network/auth-core-modal";
 import { AuthContext } from "@/context/AuthContext";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -17,6 +19,18 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${inter.className} header1_gradient`}>
+      <ToastContainer
+              position="top-center"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="light"
+            />
         <AuthCoreContextProvider
           options={{
             projectId: process.env.NEXT_PUBLIC_APP_PROJECT_ID,
@@ -34,7 +48,9 @@ export default function RootLayout({ children }) {
             },
           }}
         >
-          <AuthContext>{children}</AuthContext>
+          <AuthContext>
+            {children}
+          </AuthContext>
         </AuthCoreContextProvider>
       </body>
     </html>

@@ -1,11 +1,24 @@
 import Image from "next/image";
-import Login from "@/components/Login"
-import {SignupForm} from "@/components/SocialLogin"
+import { SignupForm } from "@/components/SocialLogin"
+import Navbar from "../components/Navbar"
+import Header from "@/components/Header"
+import Howticket from "@/components/Howticket"
+import Footer from '@/components/Footer'
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-     {/* <Login /> */}
-     <SignupForm />
-    </main>
+    <div>
+    {/* { 
+      userInfo ? ( */}
+        <>
+        <Header />
+        <Howticket />
+        <Footer />
+      
+        </>
+    {/* //   ) : <>
+    //   <SignupForm />
+    //   </>
+    // } */}
+  </div>
   );
 }
