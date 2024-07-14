@@ -112,6 +112,9 @@ import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
     function allTicketSolds(address _address) public view returns (TicketSold[] memory) {
         return _ticketSold[_address];
     }
+    function getEventIDs() external returns(uint256) {
+        return ticketLen;
+    }
 
     function burnNFT(uint256 tokenId, bytes memory recipient) public {
         if (!_isApprovedOrOwner(_msgSender(), tokenId)) {

@@ -42,14 +42,23 @@ export const AuthContext = ({ children }) => {
   //     "any"
   //   );
   // }
+  
+  const [balance, setBalance] = useState(null);
+  const [address, setaddress] = useState(null);
+  const [signer, setSigner] = useState(null);
+  const [particleAddress, setparticleAddress] = useState("");
  
   const { connect, disconnect } = useConnect();
   const { userInfo } = useAuthCore();
  
-
   
   const signerp = customProvider?.getSigner();
 
+  const contract = new ethers.Contract(
+    NFtTicketingAbi.address,
+    NFtTicketingAbi.abi,
+    signer
+  );
   console.log("signerp", signerp);
 
   const getTokenLengP = async () => {
@@ -60,11 +69,7 @@ export const AuthContext = ({ children }) => {
         console.error("Signer is undefined");
         return;
       }
-      const contract = new ethers.Contract(
-        NFtTicketingAbi.address,
-        NFtTicketingAbi.abi,
-        signer
-      );
+      
       const tokenid = await contract._nextTokenId();
       // await tokenid;
       console.log(tokenid, "tokenid");
@@ -72,11 +77,6 @@ export const AuthContext = ({ children }) => {
       console.error("Error in getTokenLengP:", error);
     }
   };
-
-  const [balance, setBalance] = useState(null);
-  const [address, setaddress] = useState(null);
-  const [signer, setSigner] = useState(null);
-  const [particleAddress, setparticleAddress] = useState("");
   // const [provider, setProvider] = useState(second)
   //   const [userInfo, setUserInfo] = useState(null);
 
@@ -156,7 +156,8 @@ export const AuthContext = ({ children }) => {
         customProvider,
         getTokenLengP,
         executeUserOp,
-        signer
+        signer,
+        contract
       }}
     >
       {children}

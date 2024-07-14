@@ -87,7 +87,8 @@ const CreateEvent = () => {
       <div>
         <div className=" text-white flex justify-center items-center flex-col">
           <form action="" onSubmit={handleEvent}>
-            <CustomInput className={" mt-5"} placeholder={"Event Name"} name={"name"} />
+            {/* <CustomInput className={" mt-5"} placeholder={"Event Name"} onChange={(e) => setName(e.target.value)} name={"name"} /> */}
+            <input type="text" placeholder={"Event Name"} onChange={(e) => setName(e.target.value)} className={`input input-bordered w-full max-w-xs`} name={"name"}  />
             <CustomInput className={" mt-5"}
               placeholder={"Creator Address"}
               onChange={(e) => setCreatorAddress(e.target.value)}
