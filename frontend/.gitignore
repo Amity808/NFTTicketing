@@ -35,11 +35,11 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-env
-.env 
-./env
+# env
+# .env 
+# ./env
 .access_token
 /access_token
 access_token
-env
+# env
 ./access_token

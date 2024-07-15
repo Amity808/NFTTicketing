@@ -113,7 +113,7 @@ const TicketCard = (id) => {
       getFormattedTicket()
   }, [fetchTicket, getFormattedTicket])
 
-    
+    if(!fetchTicket) return null;
   return (
     <div>
         <div className="card lg:card-side bg-base-100 shadow-xl">
