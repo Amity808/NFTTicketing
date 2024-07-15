@@ -15,7 +15,7 @@ const Show = () => {
     </div>
     <div className=' bg-[#272d37] text-white flex flex-col items-center justify-center w-[380px] h-[320px] rounded-lg text-center'>
       <div>
-        <Image src="/iconticket.png" width={50} className="mb-5" height={50} />
+        <Image src="/Iconticket.png" width={50} className="mb-5" height={50} />
       </div>
       <div>
         <p className=" text-lg font-normal">Once Sign with your social account</p>
@@ -24,7 +24,7 @@ const Show = () => {
     </div>
     <div className=' bg-[#272d37] text-white flex flex-col items-center justify-center w-[380px] h-[320px] rounded-lg text-center'>
       <div>
-        <Image src="/iconticket.png" width={50} className="mb-5" height={50} />
+        <Image src="/Iconticket.png" width={50} className="mb-5" height={50} />
       </div>
       <div>
         <p className=" text-lg font-normal">When you found your ticket</p>
