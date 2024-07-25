@@ -157,7 +157,8 @@ export const AuthContext = ({ children }) => {
         getTokenLengP,
         executeUserOp,
         signer,
-        contract
+        contract,
+        signerp
       }}
     >
       {children}
