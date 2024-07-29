@@ -17,7 +17,7 @@ const AllTicket = () => {
 
     const getTicketList = async () => {
       const totalRegTicket = await contract.ticketLen();
-      console.log(totalRegTicket.toString(), "reglen")
+      // console.log(totalRegTicket.toString(), "reglen")
       
       try {
         

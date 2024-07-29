@@ -39,3 +39,8 @@ npx hardhat deploy --network zeta_testnet
 📜 Contract address: 0x6cA049093E859320fbbC06C5E939F16Ed3f0A67d
 🌍 ZetaScan: https://athens.explorer.zetachain.com/address/0x6cA049093E859320fbbC06C5E939F16Ed3f0A67d
 🌍 Blockcsout: https://zetachain-athens-3.blockscout.com/address/0x6cA049093E859320fbbC06C5E939F16Ed3f0A67d
+
+
+
+facucet 
+npm install -g @zetachain/faucet-cli

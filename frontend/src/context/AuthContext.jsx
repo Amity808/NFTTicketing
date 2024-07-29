@@ -48,7 +48,7 @@ export const AuthContext = ({ children }) => {
   const [signer, setSigner] = useState(null);
   const [particleAddress, setparticleAddress] = useState("");
  
-  const { connect, disconnect } = useConnect();
+  const { connect, disconnect, connected } = useConnect();
   const { userInfo } = useAuthCore();
  
   

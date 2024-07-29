@@ -10,7 +10,7 @@ import { ethers } from "ethers";
 import NFtTicketingAbi from "@/contract/ticketnft.json";
 
 const TicketCard = ({ id }) => {
-  const { customProvider, getTokenLengP, executeUserOp, signer, signerp } =
+  const { customProvider, signer, signerp, address } =
     useAuth();
   const [tickets, setTickets] = useState([]);
   const [fetchTicket, setFetchTicket] = useState(null);
@@ -108,6 +108,23 @@ const TicketCard = ({ id }) => {
     fetchURI();
   }, [fetchTicket]);
 
+  const handleMint = async () => {
+    // ticketDetails,
+    // address -> address
+    // chainID ->  amount -> 
+    const amount = fetchTicket?.price
+    // uri = ticketDetails
+    
+    try {
+      const mint = await contract._mintNFT(address, 7000, amount, ticketDetails)
+      await mint.wait()
+      console.log(mint, "min result")
+    } catch (error) {
+      console.log(error, "mint error")
+    }
+
+  }
+
   console.log(ticketDetails, "details");
 
   if (!fetchTicket) return null;
@@ -125,7 +142,11 @@ const TicketCard = ({ id }) => {
           <p>{ticketDetails?.description}</p>
           {/* <p>{fetchTicket?.uri}</p> */}
           <div className="card-actions justify-end">
+
             <button className="btn btn-primary">
+              Mint
+            </button>
+            <button className="btn btn-primary" onClick={handleMint}>
               {fetchTicket?.price} Price
             </button>
           </div>
