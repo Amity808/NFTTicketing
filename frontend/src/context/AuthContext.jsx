@@ -84,12 +84,7 @@ export const AuthContext = ({ children }) => {
     if (userInfo) {
       fetchBalance();
     }
-    // const getSigner = async () => {
-    //   const signerProvider = await customProvider.getSigner()
-    //   setSigner(signerProvider)
-    //   console.log(signerProvider)
-    // }
-    // getSigner()
+    
   }, [userInfo, smartAccount, customProvider]);
   // console.log(signer, "signer")
 

@@ -3,6 +3,8 @@ import Navbar from '@/components/Navbar'
 import DetailCard from '@/components/DetailCard'
 import Footer from '@/components/Footer'
 
+
+
 const EventDetails = () => {
   return (
     <div>
@@ -15,3 +17,4 @@ const EventDetails = () => {
 }
 
 export default EventDetails
+

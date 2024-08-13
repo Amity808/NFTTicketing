@@ -1,3 +1,4 @@
+'use client'
 import React, {useState, useEffect, useCallback} from 'react'
 import NFtTicketingAbi from "@/contract/ticketnft.json"
 import {useAuth} from "@/context/AuthContext"
@@ -5,7 +6,7 @@ import { ethers } from "ethers"
 import TicketCard from "@/components/cards/TicketCard"
 const AllTicket = () => {
 
-  const { customProvider, getTokenLengP, executeUserOp, signer, signerp } = useAuth()
+  const { signerp } = useAuth()
 
   const contract = new ethers.Contract(
     NFtTicketingAbi.address,

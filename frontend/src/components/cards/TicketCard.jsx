@@ -5,34 +5,34 @@ import {
   useConnect,
   useAuthCore,
 } from "@particle-network/auth-core-modal";
-import { useCCTXsContext } from "@/context/CCTXsContext";
-import { useAuth } from "@/context/AuthContext";
+// import { useCCTXsContext } from "@/context/CCTXsContext";
+// import { useAuth } from "@/context/AuthContext";
 import { ethers } from "ethers";
 import NFtTicketingAbi from "@/contract/ticketnft.json";
 import { useNFT } from "@/hooks/useNFT";
-import { useMint } from "@/app/event/mint";
+import { useMint } from "@/utils/mint";
 import { useAccount, useSwitchChain } from "wagmi"
 const TicketCard = ({ id }) => {
-  const { customProvider, signer, signerp, address } =
-    useAuth();
-    const { cctxs } = useCCTXsContext()
-    const { mint } = useMint()
-    const {
-      assets,
-      selectedChain,
-      setSelectedChain,
-      amount,
-      setAmount,
-      assetsReloading,
-      assetsUpdating,
-      assetsBurned,
-      mintingInProgress,
-      recipient,
-      setRecipient,
-      foreignCoins,
-    } = useNFT()
-    const { switchChain } = useSwitchChain()
-    const { chain } = useAccount()
+  // const { customProvider, signer, signerp, address } =
+  //   useAuth();
+  //   const { cctxs } = useCCTXsContext()
+  //   const { mint } = useMint()
+  //   const {
+  //     assets,
+  //     selectedChain,
+  //     setSelectedChain,
+  //     amount,
+  //     setAmount,
+  //     assetsReloading,
+  //     assetsUpdating,
+  //     assetsBurned,
+  //     mintingInProgress,
+  //     recipient,
+  //     setRecipient,
+  //     foreignCoins,
+  //   } = useNFT()
+    // const { switchChain } = useSwitchChain()
+    // const { chain } = useAccount()
     const [tickets, setTickets] = useState([]);
     const [fetchTicket, setFetchTicket] = useState(null);
     const [ticketDetails, setTicketDetails] = useState(null);
@@ -43,7 +43,7 @@ const TicketCard = ({ id }) => {
       }
     }
 
-    const wrongNetwork = !selectedChain || parseInt(selectedChain) === 18332 || parseInt(selectedChain) === chain?.id
+    // const wrongNetwork = !selectedChain || parseInt(selectedChain) === 18332 || parseInt(selectedChain) === chain?.id
   const contract = new ethers.Contract(
     NFtTicketingAbi.address,
     NFtTicketingAbi.abi,
@@ -95,33 +95,9 @@ const TicketCard = ({ id }) => {
   console.log(fetchTicket, "fet");
   useEffect(() => {
     console.log("useeffect");
-    // if (!signer) {
-    //     console.log('Signer is not initialized.');
-    //     return;
-    // }
+    
 
-    // const fethchTickets = async () => {
-    //     const totalRegTicket = await contract.ticketLen();
-    //     console.log(totalRegTicket.toString(), "reglen")
-    //     const ticketArray = []
-
-    //     for (let i = 1; i <= totalRegTicket; i++) {
-    //         try {
-    //             const ticket = await contract._tickets(i);
-    //             const isValidTicket = ticket[1] !== '0x0000000000000000000000000000000000000000' && ticket[4] !== '';
-    //                 if (isValidTicket) {
-    //                     ticketArray.push(ticket);
-    //                 }
-    //             console.log(ticket, "ticktoPush")
-    //             // ticketArray.push(ticket);
-    //         } catch (error) {
-    //             console.log(error, "error fetching")
-    //         }
-    //     }
-    //     console.log(ticketArray, "array")
-    //     setTickets(ticketArray)
-    // }
-    // fethchTickets()
+  
     console.log("done");
 
     getFormattedTicket();

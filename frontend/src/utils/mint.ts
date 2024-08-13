@@ -14,7 +14,7 @@ export const useMint = () => {
     const { bitcoinAddress } = useBalanceContext()
     const { connectBitcoin } = useBalanceContext()
 
-    const { address, customProvider, getTokenLengP, executeUserOp, signer, signerp } = useAuth()
+    const { address, signerp } = useAuth()
 
 
     const mint = async (chain: any) => {

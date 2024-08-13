@@ -2,18 +2,18 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { AAWrapProvider, SmartAccount } from "@particle-network/aa";
-import { ZetaChainTestnet } from "@particle-network/chains";
+// import { AAWrapProvider, SmartAccount } from "@particle-network/aa";
+// import { ZetaChainTestnet } from "@particle-network/chains";
 import {
   useEthereum,
-  useConnect,
-  useAuthCore,
+  // useConnect,
+  // useAuthCore,
 } from "@particle-network/auth-core-modal";
 import CustomInput from "@/components/ui/CustomInput";
 import { ethers } from "ethers";
 import NFtTicketingAbi from "@/contract/ticketnft.json"
 import {useAuth} from "@/context/AuthContext"
-import { customProvider } from "../../../utils/provider";
+// import { customProvider } from "../../../utils/provider";
 import { toast } from 'react-toastify';
 
 const CreateEvent = () => {
