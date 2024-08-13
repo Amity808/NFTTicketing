@@ -11,28 +11,30 @@ import { ethers } from "ethers";
 import NFtTicketingAbi from "@/contract/ticketnft.json";
 import { useNFT } from "@/hooks/useNFT";
 import { useMint } from "@/utils/mint";
-import { useAccount, useSwitchChain } from "wagmi"
+import { useAccount } from "wagmi"
 const TicketCard = ({ id }) => {
-  // const { customProvider, signer, signerp, address } =
-  //   useAuth();
-  //   const { cctxs } = useCCTXsContext()
-  //   const { mint } = useMint()
-  //   const {
-  //     assets,
-  //     selectedChain,
-  //     setSelectedChain,
-  //     amount,
-  //     setAmount,
-  //     assetsReloading,
-  //     assetsUpdating,
-  //     assetsBurned,
-  //     mintingInProgress,
-  //     recipient,
-  //     setRecipient,
-  //     foreignCoins,
-  //   } = useNFT()
-    // const { switchChain } = useSwitchChain()
-    // const { chain } = useAccount()
+  const {  signerp, address } =
+    useAuth();
+    const { cctxs } = useCCTXsContext()
+    const { mint } = useMint()
+    const {
+      assets,
+      selectedChain,
+      setSelectedChain,
+      amount,
+      setAmount,
+      assetsReloading,
+      assetsUpdating,
+      assetsBurned,
+      mintingInProgress,
+      recipient,
+      setRecipient,
+      foreignCoins,
+    } = useNFT()
+    
+
+    const { switchChain } = useEthereum()
+    const { chain } = useAccount()
     const [tickets, setTickets] = useState([]);
     const [fetchTicket, setFetchTicket] = useState(null);
     const [ticketDetails, setTicketDetails] = useState(null);
@@ -43,7 +45,7 @@ const TicketCard = ({ id }) => {
       }
     }
 
-    // const wrongNetwork = !selectedChain || parseInt(selectedChain) === 18332 || parseInt(selectedChain) === chain?.id
+    const wrongNetwork = !selectedChain || parseInt(selectedChain) === 18332 || parseInt(selectedChain) === chain?.id
   const contract = new ethers.Contract(
     NFtTicketingAbi.address,
     NFtTicketingAbi.abi,
