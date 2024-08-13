@@ -15,6 +15,7 @@ import NFtTicketingAbi from "@/contract/ticketnft.json"
 import {useAuth} from "@/context/AuthContext"
 import { customProvider } from "../../../utils/provider";
 import { toast } from 'react-toastify';
+
 const CreateEvent = () => {
   const [name, setName] = useState("");
   const [creatorAddress, setCreatorAddress] = useState("");

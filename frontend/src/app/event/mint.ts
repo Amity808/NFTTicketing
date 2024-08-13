@@ -71,6 +71,7 @@ console.log(err)
             setMintingInProgress(false)
         }
     }
+    return { mint }
 
 
 }

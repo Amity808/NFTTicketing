@@ -5,22 +5,56 @@ import {
   useConnect,
   useAuthCore,
 } from "@particle-network/auth-core-modal";
+import { useCCTXsContext } from "@/context/CCTXsContext";
 import { useAuth } from "@/context/AuthContext";
 import { ethers } from "ethers";
 import NFtTicketingAbi from "@/contract/ticketnft.json";
-
+import { useNFT } from "@/hooks/useNFT";
+import { useMint } from "@/app/event/mint";
+import { useAccount, useSwitchChain } from "wagmi"
 const TicketCard = ({ id }) => {
   const { customProvider, signer, signerp, address } =
     useAuth();
-  const [tickets, setTickets] = useState([]);
-  const [fetchTicket, setFetchTicket] = useState(null);
-  const [ticketDetails, setTicketDetails] = useState(null);
+    const { cctxs } = useCCTXsContext()
+    const { mint } = useMint()
+    const {
+      assets,
+      selectedChain,
+      setSelectedChain,
+      amount,
+      setAmount,
+      assetsReloading,
+      assetsUpdating,
+      assetsBurned,
+      mintingInProgress,
+      recipient,
+      setRecipient,
+      foreignCoins,
+    } = useNFT()
+    const { switchChain } = useSwitchChain()
+    const { chain } = useAccount()
+    const [tickets, setTickets] = useState([]);
+    const [fetchTicket, setFetchTicket] = useState(null);
+    const [ticketDetails, setTicketDetails] = useState(null);
+    
+    const handleSwitchNetwork = async () => {
+      if (chain?.id) {
+        switchChain?.(selectedChain)
+      }
+    }
 
+    const wrongNetwork = !selectedChain || parseInt(selectedChain) === 18332 || parseInt(selectedChain) === chain?.id
   const contract = new ethers.Contract(
     NFtTicketingAbi.address,
     NFtTicketingAbi.abi,
     signerp
   );
+
+  const formatAmount = (amountF) => {
+    const a = Number(amountF);
+    let formated = a.toString();
+    return a % 1 === 0 ? parseInt(formated) : parseFloat(formated);
+  }
 
   console.log(contract, "contract");
   //   console.log(signer, "signerTicket")
