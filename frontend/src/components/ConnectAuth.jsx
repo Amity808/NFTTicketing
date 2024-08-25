@@ -1,15 +1,13 @@
 "use client";
 import React from "react";
 import {
-  useEthereum,
   useConnect,
-  useAuthCore,
 } from "@particle-network/auth-core-modal";
-import { SignupForm } from "@/components/SocialLogin";
+
 import { useAuth } from "@/context/AuthContext";
 import { truncateAddress } from "@/utils/truncateAddress"
 const ConnectAuth = () => {
-  const { connected, connect, disconnect } = useConnect();
+  const { connected, disconnect } = useConnect();
   const { handleLogin: login, balance: balanceInfo, address, disconnect: logout, walletAddress } = useAuth()
   return (
     <div>

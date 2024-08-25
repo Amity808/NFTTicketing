@@ -41,6 +41,8 @@ npx hardhat deploy --network zeta_testnet
 🌍 Blockcsout: https://zetachain-athens-3.blockscout.com/address/0x6cA049093E859320fbbC06C5E939F16Ed3f0A67d
 
 
+https://api.goldsky.com/api/public/project_clzopnkec66vn01v3h63hebnd/subgraphs/ticketing-zetachain-testnet/v1/gn
+
 
 facucet 
 npm install -g @zetachain/faucet-cli

@@ -1,12 +1,12 @@
 "use client";
 import React, { createContext, useContext, useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 import {
   useEthereum,
   useConnect,
   useAuthCore,
 } from "@particle-network/auth-core-modal";
-import { ParticleProvider } from '@particle-network/provider';
+// import { ParticleProvider } from '@particle-network/provider';
 import { ZetaChainTestnet, ZetaChain } from "@particle-network/chains";
 import { AAWrapProvider, SmartAccount, SendTransactionMode  } from "@particle-network/aa";
 import { ethers } from "ethers";

@@ -1,16 +1,10 @@
 "use client";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { ZetaChainTestnet } from "@particle-network/chains";
+import { ZetaChainTestnet, EthereumSepolia } from "@particle-network/chains";
 import { AuthCoreContextProvider } from "@particle-network/auth-core-modal";
 import { AuthContext } from "@/context/AuthContext";
 import { ToastContainer } from "react-toastify";
-// import {
-//   injectedWallet,
-//   metaMaskWallet,
-//   okxWallet,
-//   xdefiWallet,
-// } from "@rainbow-me/rainbowkit/wallets";
 import "@rainbow-me/rainbowkit/styles.css";
 import { RainbowKitProvider, getDefaultConfig } from "@rainbow-me/rainbowkit";
 import { WagmiProvider } from "wagmi";
@@ -60,7 +54,7 @@ export default function RootLayout({ children }) {
                   wallet: {
                     visible: true,
                     customStyle: {
-                      supportChains: [ZetaChainTestnet],
+                      supportChains: [ZetaChainTestnet, EthereumSepolia],
                     },
                   },
                 }}

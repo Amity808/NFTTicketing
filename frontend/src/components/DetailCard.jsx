@@ -1,7 +1,25 @@
 import React from 'react'
 import Image from 'next/image'
+import { useMint } from '@/utils/mint'
+import { useNFT } from '@/hooks/useNFT';
+
 
 const DetailCard = () => {
+  const {
+    assets,
+    selectedChain,
+    setSelectedChain,
+    amount,
+    setAmount,
+    assetsReloading,
+    assetsUpdating,
+    assetsBurned,
+    mintingInProgress,
+    recipient,
+    setRecipient,
+    foreignCoins,
+  } = useNFT()
+  const { mint } = useMint()
   return (
     <div>
         <div className=' flex flex-row justify-center gap-16 items-center'>
