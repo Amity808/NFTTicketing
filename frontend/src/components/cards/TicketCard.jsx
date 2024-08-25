@@ -6,7 +6,7 @@ import {
   useAuthCore,
 } from "@particle-network/auth-core-modal";
 // import { useCCTXsContext } from "@/context/CCTXsContext";
-// import { useAuth } from "@/context/AuthContext";
+import { useAuth } from "@/context/AuthContext";
 import { ethers } from "ethers";
 import NFtTicketingAbi from "@/contract/ticketnft.json";
 import { useNFT } from "@/hooks/useNFT";
