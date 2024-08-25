@@ -97,7 +97,10 @@ export const useFetchUserNFTs = () => {
             assests.sort((a: any, b: any) => parseInt(b.id) - parseInt(a.id))
       setAssets(assests)
         } catch (error) {
-            
-        }
+            console.error(error)
+    } finally {
+      setAssetsReloading(false)
+    }
       }
+      return { fetchNFTs }
 }
