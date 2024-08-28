@@ -2,12 +2,13 @@
 import React, { createContext, useContext, useEffect, useState } from "react"
 import EventEmitter from "eventemitter3"
 
-import { useZetaChainClient } from "@/hooks/useZetaChainClient"
-
+// import { useZetaChainClient } from "@/hooks/useZetaChainClient"
+import { useAuth } from "./AuthContext"
 const CCTXsContext = createContext<any>(null)
 
 export const CTXsProvider = ({ children }: { children: React.ReactNode }) => {
-    const { client } = useZetaChainClient()
+    // const { client } = useZetaChainClient()
+    const { client } = useAuth()
     const [inbounds, setInbounds] = useState<any>([])
     const [cctxs, setCCTXs] = useState<any>([])
 

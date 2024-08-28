@@ -8,9 +8,9 @@ import { ToastContainer } from "react-toastify";
 import "@rainbow-me/rainbowkit/styles.css";
 import { RainbowKitProvider, getDefaultConfig } from "@rainbow-me/rainbowkit";
 import { WagmiProvider } from "wagmi";
-
+import Index from "./index"
 import { bscTestnet, sepolia, zetachainAthensTestnet } from "wagmi/chains";
-
+import { ZetaChainProvider } from "@/hooks/useZetaChainClient"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -27,6 +27,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${inter.className} header1_gradient`}>
+        <ZetaChainProvider>
+
+        
         <WagmiProvider config={config}>
           <QueryClientProvider client={queryClient}>
             <RainbowKitProvider>
@@ -59,11 +62,16 @@ export default function RootLayout({ children }) {
                   },
                 }}
               >
-                <AuthContext>{children}</AuthContext>
+                <AuthContext>
+                  <Index>
+                  {children}
+                  </Index>
+                </AuthContext>
               </AuthCoreContextProvider>
             </RainbowKitProvider>
           </QueryClientProvider>
         </WagmiProvider>
+        </ZetaChainProvider>
       </body>
     </html>
   );

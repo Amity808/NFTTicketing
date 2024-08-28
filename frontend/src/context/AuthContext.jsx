@@ -1,5 +1,5 @@
 "use client";
-import React, { createContext, useContext, useState, useEffect } from "react";
+import React, { createContext, useContext, useState, useEffect, useCallback } from "react";
 // import { useRouter } from "next/navigation";
 import {
   useEthereum,
@@ -12,13 +12,14 @@ import { AAWrapProvider, SmartAccount, SendTransactionMode  } from "@particle-ne
 import { ethers } from "ethers";
 import NFtTicketingAbi from "@/contract/ticketnft.json";
 import { ParticleNetwork } from "@particle-network/auth";
-
+import { ZetaChainClient } from "@zetachain/toolkit/client"
 const SocialoginAccount = createContext();
 
 export const AuthContext = ({ children }) => {
   const chain = ZetaChainTestnet.id
   console.log(chain)
   const { provider } = useEthereum();
+
   const smartAccount = new SmartAccount(provider, {
     projectId: process.env.NEXT_PUBLIC_APP_PROJECT_ID,
     clientKey: process.env.NEXT_PUBLIC_APP_CLIENT_KEY,
@@ -53,6 +54,31 @@ export const AuthContext = ({ children }) => {
  
   
   const signerp = customProvider?.getSigner();
+  if (signerp) {
+    console.log("signerp", signerp);
+  } else {
+    console.error("customProvider is not available");
+  }
+
+  const createClient = useCallback((signer) => {
+    return new ZetaChainClient({
+      signer: signer,
+      network: "testnet",
+      chains: {
+        zeta_testnet: {
+          api: [
+            {
+              url: `https://zetachain-athens.g.allthatnode.com/archive/evm/${process.env.NEXT_PUBLIC_ATN_KEY}`,
+              type: "evm",
+            },
+          ],
+        },
+      },
+    })
+  }, [])
+
+  const [client, setClient] = useState(() => createClient(signerp))
+
 
   const contract = new ethers.Contract(
     NFtTicketingAbi.address,
@@ -62,7 +88,7 @@ export const AuthContext = ({ children }) => {
   console.log("signerp", signerp);
 
   const getTokenLengP = async () => {
-    const signer = await customProvider.getSigner();
+    const signer = await customProvider?.getSigner();
     
     try {
       if (!signer) {
@@ -84,8 +110,11 @@ export const AuthContext = ({ children }) => {
     if (userInfo) {
       fetchBalance();
     }
+    if (signerp) {
+      setClient(createClient(signerp))
+    }
     
-  }, [userInfo, smartAccount, customProvider]);
+  }, [userInfo, smartAccount, customProvider, signerp, createClient]);
   // console.log(signer, "signer")
 
   console.log(userInfo);
@@ -99,7 +128,7 @@ export const AuthContext = ({ children }) => {
       addressParticle
     );
     setBalance(ethers.utils.formatEther(balanceResponseParticle));
-    const signers = customProvider.getSigner();
+    const signers = customProvider?.getSigner();
     console.log(signers);
     setSigner(signers);
   };
@@ -153,7 +182,7 @@ export const AuthContext = ({ children }) => {
         executeUserOp,
         signer,
         contract,
-        signerp
+        signerp, client
       }}
     >
       {children}

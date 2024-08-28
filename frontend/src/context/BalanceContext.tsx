@@ -8,18 +8,19 @@ import React, {
 } from "react"
 import debounce from "lodash/debounce"
 import { useAccount } from "wagmi"
-import { useZetaChainClient } from "@/hooks/useZetaChainClient"
-
+// import { useZetaChainClient } from "@/hooks/useZetaChainClient"
+import { useAuth } from "./AuthContext"
 type Props = {}
 
 const BalanceContext = createContext<any>(null)
 
-const BalanceProvider = ({
+export const BalanceProvider = ({
     children,
 }: {
     children: React.ReactNode
 }) => {
-    const { client } = useZetaChainClient()
+    // const { client } = useZetaChainClient()
+    const { client } = useAuth()
     const { address, isConnected } = useAccount()
     const [balances, setBalances] = useState<any>([])
     const [balancesLoading, setBalancesLoading] = useState(true)

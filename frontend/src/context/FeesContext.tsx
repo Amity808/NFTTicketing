@@ -7,13 +7,14 @@ import React, {
   } from "react"
   import debounce from "lodash/debounce"
   import { useAccount } from "wagmi"
-  
-  import { useZetaChainClient } from "@/hooks/useZetaChainClient"
+  import { useAuth } from "./AuthContext"
+  // import { useZetaChainClient } from "@/hooks/useZetaChainClient"
   import { useConnect } from "@particle-network/auth-core-modal";
   const FeesContext = createContext<any>(null)
   
   export const FeesProvider = ({ children }: { children: React.ReactNode }) => {
-    const { client } = useZetaChainClient()
+    // const { client } = useZetaChainClient()
+    const { client } = useAuth()
     const { isConnected } = useAccount()
     const [fees, setFees] = useState<any>([])
     const { connect, disconnect, connected } = useConnect();
